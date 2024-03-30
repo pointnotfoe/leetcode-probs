@@ -70,10 +70,10 @@ Example 4:
 //https://leetcode.com/problems/longest-substring-without-repeating-characters/discuss/1737/C%2B%2B-code-in-9-lines.
 int lengthOfLongestSubstring(string s) {
         vector<int> dict(256, -1);
-        int maxLen = 0, start = -1;
+        int maxLen = 0, start = -1;//taking the index before so no need to do +1 on size
         for (int i = 0; i != s.length(); i++) {
-            if (dict[s[i]] > start)
-                start = dict[s[i]];
+            if (dict[s[i]] > start)//already seen this character
+                start = dict[s[i]];//update to last seen index, if we update to current the to +1 on maxlen calc
             dict[s[i]] = i;
             maxLen = max(maxLen, i - start);
         }
