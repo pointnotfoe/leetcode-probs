@@ -60,6 +60,23 @@ using namespace std;
 int max_score(vector<int> sprints, int k)
 {
     int max_score = 0;
+    int largest_sprint = 0;
+    for (int i  = 0; i < sprints.size(); i++)
+    {
+        if (sprints[i] > sprints[largest_sprint])
+            largest_sprint = i;
+    }
+    while (k)
+    {
+        for (int score = sprints[largest_sprint]; score > 0 && k > 0; score--, k--)
+        {
+            max_score += score;
+        }
+        largest_sprint--;
+        if (largest_sprint < 0)
+            largest_sprint = sprints.size() - 1;
+    }
+    return max_score;
     //if non consective days then this
     // map<int, int> score_count;
     // for (auto &days: sprints)
@@ -78,23 +95,6 @@ int max_score(vector<int> sprints, int k)
     //     max_score += score*(min(score_cnt, k));
     //     k -= min(score_cnt, k);
     // }
-    int largest_sprint = 0;
-    for (int i  = 0; i < sprints.size(); i++)
-    {
-        if (sprints[i] > sprints[largest_sprint])
-            largest_sprint = i;
-    }
-    while (k)
-    {
-        for (int score = sprints[largest_sprint]; score > 0 && k > 0; score--, k--)
-        {
-            max_score += score;
-        }
-        largest_sprint--;
-        if (largest_sprint < 0)
-            largest_sprint = sprints.size() - 1;
-    }
-    return max_score;
 }
 
 void print_vec(vector<int> s)
