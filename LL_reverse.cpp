@@ -52,3 +52,50 @@ public:
         return prev;
     }
 };
+
+/**https://leetcode.com/explore/learn/card/recursion-i/251/scenario-i-recurrence-relation/2378/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void recrReverseList(ListNode* head, ListNode** prev) {
+        if (nullptr == head)
+        {
+            return;
+        }
+        ListNode* next = head->next;
+        head->next = *prev;
+        *prev = head;
+        recrReverseList(next, prev);
+    }
+    ListNode* reverseList(ListNode* head) {
+        ///---------itr
+        // if (nullptr == head)
+        // {
+        //     return head;
+        // }
+        // ListNode *prev = nullptr;
+        // while(head)
+        // {
+        //     ListNode *next = head->next;
+        //     head->next = prev;
+        //     prev = head;
+        //     head = next;
+        // }
+        // return prev;
+        ///-------------------------
+        ///---------recr----------------
+        ListNode * prev = nullptr;
+        recrReverseList(head, &prev);
+        ///-------------------------
+
+        return prev;
+    }
+};

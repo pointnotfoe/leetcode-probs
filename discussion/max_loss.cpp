@@ -1,7 +1,7 @@
 /*
 https://leetcode.com/discuss/interview-question/4947258/How-to-solve-this-one-oror-Amazon-OA
 2. Code Question 2
-You are analyzing the market trends of Amazon stocks. An AWS financial service model returned an array of integers, PnL (Profit and Loss), 
+You are analyzing the market trends of Amazon stocks. A financial service model returned an array of integers, PnL (Profit and Loss), 
 for your portfolio representing that in the ith month, you will either gain or lose PnL[i]. All reported PnL values are positive, representing gains.
 As part of the analysis, you will perform the following operation on the PnL array any number of times:
 • Choose any month i (0 ≤ i<n) and multiply PnL[i] by -1
@@ -71,67 +71,7 @@ void print_vec(vector<int> s)
  * The function accepts INTEGER_ARRAY PnL as parameter.
  */
 int getMaxNegativePnL(vector<int> PnL) {
-    print_vec(PnL);
-    int ans = 0;
-    int len = PnL.size();
-    vector<int> cum_PnL(len, 0);
-    cum_PnL[0] = PnL[0];
-    // map<int, set<int, greater<int>>, greater<int>> profit_map;
-    map<int, set<int>> profit_map;
-    // profit_map[PnL[0]].insert(0);
-    for (int i = 1; i < len; i++)
-    {
-        cum_PnL[i] += cum_PnL[i-1] + PnL[i];
-        profit_map[PnL[i]].insert(i);
-    }
-    // for (int i = len - 1; i > 0; i--)
-    // {
-    //     auto profit_lte = profit_map.lower_bound(cum_PnL[i]);
-    //     if (profit_lte != profit_map.end())
-    //     {
-    //         auto index_set = profit_lte->second;
-    //         auto index_lte = index_set.lower_bound(i);
-    //         if(index_lte != index_set.end())
-    //         {
-    //             ans++;
-    //         }
-    //     }
-    // }
-    for (auto it = profit_map.begin(); it!= profit_map.end(); it++)
-    {
-        for (auto profit_index : it->second)
-        {
-            auto profit  = (it->first) * 2;
-            // it->second.erase(it->second.begin());
-            bool good = true;
-            for (int i = profit_index; i < len; i++)
-            {
-                if (cum_PnL[i] - profit < 0){
-                    good = false;
-                    break;
-                }
-                cum_PnL[i] -= profit;
-            }
-            if (good)
-            {
-                ans++;
-            }
-        }
-    }
-    // for (int i = 1; i < len; i++)
-    // {
-    //     bool got = true;
-    //     for (int j = 1; j < len; j++)
-    //     {
-    //         if (cum_PnL[j] - PnL[i]*2 < 0)
-    //             {got = false;
-    //             break;}
-    //     }
-    //     if (got)
-    //         ans++;
-    // }
-    cout << ans << "\n";
-    return ans;
+
 }
 int main()
 {
